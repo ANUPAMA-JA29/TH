@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-const upload = multer({ dest: 'uploads/' });
+const upload = multer({ dest: '/tmp' });
 let scamHistory = [];
 
 function analyzeContent(text) {
@@ -74,12 +74,13 @@ app.get('/analytics', (req, res) => res.json({
     mostCommon: "Virtual Arrest / Deepfake",
     timeline: scamHistory
 }));
-
-app.listen(5000, () => console.log(`🚀 Server on http://localhost:5000`));
-// Keep your app.listen for local testing, but export for Vercel
+// Remove your old app.listen() and replace it with this:
 if (process.env.NODE_ENV !== 'production') {
-    const PORT = 5000;
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+        console.log(`Local server running on http://localhost:${PORT}`);
+    });
 }
 
+// THIS IS THE MOST IMPORTANT LINE FOR VERCEL:
 module.exports = app;
