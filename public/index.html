@@ -181,12 +181,12 @@ function startMic(){
     recognition.start();
 }
 
-function generateReport(){
+function generateReport() {
     const content = document.getElementById("result").innerText;
     const blob = new Blob([content], {type: "text/plain"});
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "Scam_Report.txt";
+    link.download = "ScamGuard_Report.txt";
     link.click();
 }
 </script>
