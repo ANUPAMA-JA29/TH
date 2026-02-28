@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
+
 const app = express();
 
 app.use(cors());
@@ -9,6 +10,7 @@ app.use(express.json());
 app.use(express.static('public'));
 
 const upload = multer({ dest: '/tmp' });
+
 let scamHistory = [];
 
 function analyzeContent(text) {
@@ -17,7 +19,7 @@ function analyzeContent(text) {
     let patterns = [];
     let psychology = [];
     let explanation = [];
-    let legalFact = ""; 
+    let legalFact = "";
 
     const agencyKeywords = ["cbi", "narcotics", "ncb", "ed", "mumbai police", "interpol"];
     const arrestKeywords = ["digital custody", "virtual arrest", "money laundering", "closed room", "don't hang up"];
@@ -44,7 +46,10 @@ function analyzeContent(text) {
         probability,
         riskLevel: probability > 85 ? "CRITICAL" : (probability > 40 ? "Suspicious" : "Safe"),
         scamType: score >= 95 ? "Virtual Arrest Attempt" : "Potential Fraud",
-        patterns, psychology, explanation, legalFact,
+        patterns,
+        psychology,
+        explanation,
+        legalFact,
         advice: "Call 1930 immediately.",
         transcript: text
     };
@@ -74,13 +79,14 @@ app.get('/analytics', (req, res) => res.json({
     mostCommon: "Virtual Arrest / Deepfake",
     timeline: scamHistory
 }));
-// Remove your old app.listen() and replace it with this:
-if (process.env.NODE_ENV !== 'production') {
-    const PORT = process.env.PORT || 5000;
+
+// Only start server locally, not on Vercel
+const PORT = process.env.PORT || 5000;
+if (require.main === module) {
     app.listen(PORT, () => {
         console.log(`Local server running on http://localhost:${PORT}`);
     });
 }
 
-// THIS IS THE MOST IMPORTANT LINE FOR VERCEL:
+// Required for Vercel serverless
 module.exports = app;
