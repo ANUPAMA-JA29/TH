@@ -207,22 +207,32 @@ async function analyzeText(){
     loadAnalytics();
 }
 
-async function analyzeAudio(){
-    const fileInput = document.getElementById("audioFile");
-    const file = fileInput.files[0];
-    if(!file) return alert("Please upload an audio file first!");
+async function analyzeAudio() {
+    alert("Pro Tip: Play your audio file near the microphone. ScamGuard will transcribe and analyze it in real-time!");
+    
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'en-US';
+    
+    recognition.onstart = () => {
+        document.getElementById("result").style.display = "block";
+        document.getElementById("riskLevel").innerText = "👂 Listening to Audio File...";
+    };
 
-    const formData = new FormData();
-    formData.append("audio", file);
+    recognition.onresult = async (event) => {
+        const transcript = event.results[0][0].transcript;
+        
+        // NOW: Send the REAL words we heard to the server
+        const res = await fetch("/analyze", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({ message: transcript })
+        });
+        const data = await res.json();
+        displayResult(data);
+        loadAnalytics();
+    };
 
-    // UPDATED: Removed http://localhost:5000
-    const res = await fetch("/analyze-audio", {
-        method: "POST", 
-        body: formData
-    });
-    const data = await res.json();
-    displayResult(data);
-    loadAnalytics();
+    recognition.start();
 }
 
 function displayResult(data){
