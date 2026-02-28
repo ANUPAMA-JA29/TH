@@ -6,11 +6,11 @@
 
 ## Basic Details
 
-### Team Name: [Your Team Name]
+### Team Name: TechDivas
 
 ### Team Members
-- Member 1: [N Fadeela] - [GEC Palakkad]
-- Member 2: [Anupama J A] - [GEC Palakkad]
+- Member 1: N Fadeela - GEC Palakkad
+- Member 2: Anupama J A - GEC Palakkad
 
 ### Hosted Project Link
 [Link to your Gi...]
