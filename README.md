@@ -63,7 +63,7 @@ npm install
 
 #### Run
 ```bash
-[Run commands - e.g., npm start, python app.py]
+node server.js
 ```
 
 ## Project Documentation
