@@ -8,8 +8,20 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/analyze",
       "dest": "server.js"
+    },
+    {
+      "src": "/analyze-video",
+      "dest": "server.js"
+    },
+    {
+      "src": "/analytics",
+      "dest": "server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     }
   ]
 }
