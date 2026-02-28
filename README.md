@@ -13,7 +13,7 @@
 - Member 2: Anupama J A - GEC Palakkad
 
 ### Hosted Project Link
-[Insert Link Here]
+*https://scamguader.vercel.app/*
 
 ### Project Description
 ScamGuard AI is a real-time fraud intelligence platform that identifies scam patterns in SMS and voice calls. It uses "Explainable AI" to not just flag threats, but to teach users about the psychological manipulation tactics (vishing/smishing) being used against them in real-time.
