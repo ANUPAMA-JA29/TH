@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="./img.png" alt="Project Banner" width="100%">
+  <img src="" alt="Project Banner" width="100%">
 </p>
 
-# ScamGuard AI 🛡️
+# ScamGuard AI 🎯
 
 ## Basic Details
 
@@ -13,16 +13,16 @@
 - Member 2: Anupama J A - GEC Palakkad
 
 ### Hosted Project Link
-[Link to your Gi...]
+[Insert Link Here]
 
 ### Project Description
-ScamGuard AI is a real-time fraud detection platform that analyzes text messages and voice calls for psychological manipulation. It uses a weighted heuristic engine to provide "Explainable AI" results, telling users exactly why a message is flagged as a scam.
+ScamGuard AI is a real-time fraud intelligence platform that identifies scam patterns in SMS and voice calls. It uses "Explainable AI" to not just flag threats, but to teach users about the psychological manipulation tactics (vishing/smishing) being used against them in real-time.
 
 ### The Problem statement
-Digital financial fraud and social engineering (vishing/smishing) are skyrocketing, often preying on people's lack of technical knowledge. Existing solutions either block numbers (which scammers rotate) or offer "Black Box" warnings that don't educate the user on the tactics being used.
+Digital fraud is skyrocketing, and scammers are using increasingly sophisticated social engineering. Most people don't recognize "Artificial Urgency" or "Authority Impersonation" until it's too late. Current filters are often "black boxes" that don't provide the user with the reasoning behind a warning.
 
 ### The Solution
-We built a privacy-first, local-inference tool that breaks down suspicious communication into four categories: Financial, Urgency, Threat, and Reward. By processing audio and text locally in the browser, we ensure user privacy while providing instantaneous risk assessments and educational feedback.
+We built a privacy-first, local-inference tool. By using the browser's built-in Web Speech and Audio APIs, we analyze text and audio for specific weighted keywords (Financial, Urgency, Threat, Reward) without sending private data to expensive third-party Cloud AI services. This ensures zero-cost, high-speed, and private analysis.
 
 ---
 
@@ -31,21 +31,21 @@ We built a privacy-first, local-inference tool that breaks down suspicious commu
 ### Technologies/Components Used
 
 **For Software:**
-- Languages used: JavaScript (ES6+), HTML5, CSS3, Node.js
-- Frameworks used: Express.js
-- Libraries used: Chart.js (Data Visualization), Multer (File Handling)
-- Tools used: VS Code, Git, Web Speech API, Web Audio API
+- **Languages used:** JavaScript (ES6+), HTML5, CSS3
+- **Frameworks used:** Express.js (Node.js)
+- **Libraries used:** Chart.js (Real-time Analytics), Multer (File Handling)
+- **APIs used:** Web Speech API (Speech Recognition), Web Audio API (Audio Processing)
+- **Tools used:** VS Code, Git
 
 ---
 
 ## Features
 
-List the key features of your project:
-- **Instant Text Analysis:** Heuristic-based scanning of SMS and emails for scam patterns.
-- **High-Speed Audio Inference:** Analyzes call recordings at 1.5x speed using a silent Web Audio bridge to save time.
-- **Live Mic Detection:** Real-time "listening" mode for immediate analysis of ongoing conversations.
-- **Explainable AI Dashboard:** Provides a breakdown of "Manipulation Tactics" (e.g., Artificial Urgency) and a visual Risk Trend chart.
-- **Automated Incident Reporting:** Generates a downloadable text-based report for legal or banking evidence.
+- **Turbo Audio Analysis:** Processes call recordings at 1.5x speed using a silent Web Audio bridge, saving users 40% of wait time without audible noise.
+- **Explainable AI (XAI) Panel:** Categorizes scams into "Tactics" (e.g., Fear Induction, Financial Pressure) to improve user digital literacy.
+- **Live Mic Detection:** Real-time "listening" mode for immediate analysis of ongoing phone conversations or live speech.
+- **Risk Trend Dashboard:** A visual timeline tracking the history of scans to help users identify if they are being targeted by a persistent campaign.
+- **Instant Report Generator:** Creates a downloadable text-based incident report for use as evidence with banks or law enforcement.
 
 ---
 
