@@ -76,3 +76,10 @@ app.get('/analytics', (req, res) => res.json({
 }));
 
 app.listen(5000, () => console.log(`🚀 Server on http://localhost:5000`));
+// Keep your app.listen for local testing, but export for Vercel
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+module.exports = app;
