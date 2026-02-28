@@ -212,53 +212,32 @@ async function analyzeAudio() {
     const file = fileInput.files[0];
     if (!file) return alert("Select a file first!");
 
-    // Create a local URL for your audio file
     const audioURL = URL.createObjectURL(file);
     const audio = new Audio(audioURL);
     
-    // 1. THE SPEED HACK: Processes the file 2.5x faster than real-time
-    audio.playbackRate = 2.5; 
-
-    // 2. THE SILENCE HACK: Routes audio to a "dead end" so you don't hear it
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const source = audioContext.createMediaElementSource(audio);
-    const gainNode = audioContext.createGain();
-    gainNode.gain.value = 0; // Mute volume internally
-    source.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-
-    // 3. THE ANALYZER: Uses the Browser's built-in "Listener"
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = 'en-US';
-    
-    // UI Updates
-    const btn = document.querySelector('button[onclick="analyzeAudio()"]');
-    btn.innerText = "⚡ Rapid Scanning...";
+    recognition.interimResults = false;
+
+    document.getElementById("riskLevel").innerText = "⏳ Extracting Intelligence from Audio...";
     document.getElementById("result").style.display = "block";
-    document.getElementById("riskLevel").innerText = "Analyzing audio stream (2.5x Speed)...";
 
     recognition.onresult = async (event) => {
         const transcript = event.results[0][0].transcript;
-        
-        // Send the extracted text to your local Node.js server
+        // Send the real transcript extracted from the file to your Node server
         const res = await fetch("/analyze", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ message: transcript })
         });
         const data = await res.json();
-        
-        // Show the results on the dashboard
         displayResult(data);
         loadAnalytics();
-        
-        audio.pause(); 
-        btn.innerText = "Analyze Audio";
+        audio.pause(); // Stop playing once we have the text
     };
 
-    // 4. Start the internal process
     recognition.start();
-    audio.play(); 
+    audio.play(); // This triggers the SpeechRecognition to "hear" the file
 }
 
 function displayResult(data){
