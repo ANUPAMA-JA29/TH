@@ -208,20 +208,23 @@ async function analyzeText(){
 }
 
 async function analyzeAudio() {
-    alert("Pro Tip: Play your audio file near the microphone. ScamGuard will transcribe and analyze it in real-time!");
+    const fileInput = document.getElementById("audioFile");
+    const file = fileInput.files[0];
+    if (!file) return alert("Select a file first!");
+
+    const audioURL = URL.createObjectURL(file);
+    const audio = new Audio(audioURL);
     
     const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
     recognition.lang = 'en-US';
-    
-    recognition.onstart = () => {
-        document.getElementById("result").style.display = "block";
-        document.getElementById("riskLevel").innerText = "👂 Listening to Audio File...";
-    };
+    recognition.interimResults = false;
+
+    document.getElementById("riskLevel").innerText = "⏳ Extracting Intelligence from Audio...";
+    document.getElementById("result").style.display = "block";
 
     recognition.onresult = async (event) => {
         const transcript = event.results[0][0].transcript;
-        
-        // NOW: Send the REAL words we heard to the server
+        // Send the real transcript extracted from the file to your Node server
         const res = await fetch("/analyze", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -230,9 +233,11 @@ async function analyzeAudio() {
         const data = await res.json();
         displayResult(data);
         loadAnalytics();
+        audio.pause(); // Stop playing once we have the text
     };
 
     recognition.start();
+    audio.play(); // This triggers the SpeechRecognition to "hear" the file
 }
 
 function displayResult(data){
